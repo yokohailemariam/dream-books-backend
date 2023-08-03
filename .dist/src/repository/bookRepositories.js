@@ -26,17 +26,22 @@ exports.createBook = createBook;
 // Math.floor(price - discountRate * (1 / 100) * price)
 function getBooks({ perPage: limit = 10, page: offset = 0 } = {}) {
     return __awaiter(this, void 0, void 0, function* () {
-        const books = yield bookEntities_1.Book.findAll({
-            limit,
-            offset,
-            order: [['createdAt', 'DESC']]
-        });
-        // Calculate the discounted price of each book
-        books.forEach((book) => {
-            const discountedPrice = book.dataValues.price * (1 - book.dataValues.discountRate / 100);
-            book.dataValues.price = discountedPrice;
-        });
-        return books;
+        try {
+            const books = yield bookEntities_1.Book.findAll({
+                limit,
+                offset,
+                order: [['createdAt', 'DESC']]
+            });
+            // Calculate the discounted price of each book
+            books.forEach((book) => {
+                const discountedPrice = book.dataValues.price * (1 - book.dataValues.discountRate / 100);
+                book.dataValues.price = discountedPrice;
+            });
+            return books;
+        }
+        catch (error) {
+            throw error;
+        }
     });
 }
 exports.getBooks = getBooks;

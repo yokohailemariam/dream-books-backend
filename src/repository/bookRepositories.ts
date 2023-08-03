@@ -21,20 +21,24 @@ export async function getBooks({
   perPage: limit = 10,
   page: offset = 0
 }: GetBooksOptions = {}) {
-  const books = await Book.findAll({
-    limit,
-    offset,
-    order: [['createdAt', 'DESC']]
-  })
+  try {
+    const books = await Book.findAll({
+      limit,
+      offset,
+      order: [['createdAt', 'DESC']]
+    })
 
-  // Calculate the discounted price of each book
-  books.forEach((book) => {
-    const discountedPrice =
-      book.dataValues.price * (1 - book.dataValues.discountRate / 100)
-    book.dataValues.price = discountedPrice
-  })
+    // Calculate the discounted price of each book
+    books.forEach((book) => {
+      const discountedPrice =
+        book.dataValues.price * (1 - book.dataValues.discountRate / 100)
+      book.dataValues.price = discountedPrice
+    })
 
-  return books
+    return books
+  } catch (error) {
+    throw error
+  }
 }
 
 export interface BookData {
