@@ -1,16 +1,11 @@
-import express, { Express, Request, Response, json, urlencoded } from 'express'
-import dotenv from 'dotenv'
+import express, { Express, json, urlencoded } from 'express'
 import { sequelize } from './src/config/db'
-import {
-  createBookHandler,
-  getBookHandler,
-  uploadBookImage,
-  uploadImage
-} from './src/controller/bookControllers'
+import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import swaggerJsdoc from 'swagger-jsdoc'
 import swaggerUi from 'swagger-ui-express'
+
 import routes from './src/routes'
 
 dotenv.config()

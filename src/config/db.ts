@@ -1,30 +1,13 @@
-// import { Sequelize, DataTypes } from 'sequelize'
-
-// const sequelize = new Sequelize(
-//   'postgres://postgres:root@localhost:5432/ethio-swift',
-//   { dialect: 'postgres' }
-// )
-
-// sequelize
-//   .authenticate()
-//   .then(() => {
-//     console.log('Database connected to discover')
-//   })
-//   .catch((err) => {
-//     console.log(err)
-//   })
-
-// const db = {
-//   Sequelize: Sequelize,
-//   sequelize: sequelize
-// }
-
-// export default db
-
+import dotenv from 'dotenv'
 import { Sequelize } from 'sequelize'
 
+dotenv.config()
+console.log('process.env.DB_DATABASE')
+console.log(process.env.DB_DATABASE)
 export const sequelize = new Sequelize(
-  'postgres://postgres:root@localhost:5432/books',
+  process.env.DB_DATABASE ?? '',
+  process.env.DB_USERNAME ?? '',
+  process.env.DB_PASSWORD,
   { dialect: 'postgres' }
 )
 
