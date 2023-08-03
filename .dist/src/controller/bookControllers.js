@@ -21,14 +21,19 @@ const bookServices_1 = require("../service/bookServices");
 function createBookHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { title, description, discountRate, coverImage, price } = req.body;
-        yield (0, bookRepositories_1.createBook)({
-            title,
-            description,
-            discountRate,
-            coverImage,
-            price
-        });
-        res.send('Book created successfully!');
+        try {
+            yield (0, bookRepositories_1.createBook)({
+                title,
+                description,
+                discountRate,
+                coverImage,
+                price
+            });
+            res.send('Book created successfully!');
+        }
+        catch (error) {
+            throw error;
+        }
     });
 }
 exports.createBookHandler = createBookHandler;
@@ -42,10 +47,9 @@ function uploadBookImage(req, res) {
 exports.uploadBookImage = uploadBookImage;
 function getBookHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const perPage = Number(req.query.perPage) || 10;
-        const page = Number(req.query.page) || 1;
-        const offset = (page - 1) * perPage;
-        const books = yield (0, bookServices_1.getBooksService)({ perPage, page: offset });
+        const perPage = Number(req.query.perPage);
+        const page = Number(req.query.page);
+        const books = (0, bookServices_1.getBooksService)({ perPage, page });
         res.send(books);
     });
 }

@@ -17,9 +17,10 @@ function createBookService(bookData) {
     });
 }
 exports.createBookService = createBookService;
-function getBooksService({ perPage: limit = 10, page: offset = 0 }) {
+function getBooksService({ perPage: limit = 10, page = 1 }) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield (0, bookRepositories_1.getBooks)({ perPage: limit, page: offset });
+        const offset = (page - 1) * limit;
+        return (0, bookRepositories_1.getBooks)({ perPage: limit, page: offset });
     });
 }
 exports.getBooksService = getBooksService;

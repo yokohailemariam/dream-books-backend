@@ -11,7 +11,8 @@ export async function createBookService(bookData: BookData) {
 
 export async function getBooksService({
   perPage: limit = 10,
-  page: offset = 0
+  page = 1
 }: GetBooksOptions) {
-  return await getBooks({ perPage: limit, page: offset })
+  const offset = (page - 1) * limit
+  return getBooks({ perPage: limit, page: offset })
 }

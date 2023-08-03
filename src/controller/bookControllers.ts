@@ -24,16 +24,19 @@ import { getBooksService } from '../service/bookServices'
 
 export async function createBookHandler(req: Request, res: Response) {
   const { title, description, discountRate, coverImage, price } = req.body
+  try {
+    await createBook({
+      title,
+      description,
+      discountRate,
+      coverImage,
+      price
+    })
 
-  await createBook({
-    title,
-    description,
-    discountRate,
-    coverImage,
-    price
-  })
-
-  res.send('Book created successfully!')
+    res.send('Book created successfully!')
+  } catch (error) {
+    throw error
+  }
 }
 
 export const uploadImage = upload.single('image')
@@ -43,12 +46,10 @@ export async function uploadBookImage(req: Request, res: Response) {
 }
 
 export async function getBookHandler(req: Request, res: Response) {
-  const perPage = Number(req.query.perPage) || 10
-  const page = Number(req.query.page) || 1
+  const perPage = Number(req.query.perPage)
+  const page = Number(req.query.page)
 
-  const offset = (page - 1) * perPage
-
-  const books = await getBooksService({ perPage, page: offset })
+  const books = getBooksService({ perPage, page })
 
   res.send(books)
 }
