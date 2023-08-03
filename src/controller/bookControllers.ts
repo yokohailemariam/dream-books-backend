@@ -49,7 +49,11 @@ export async function getBookHandler(req: Request, res: Response) {
   const perPage = Number(req.query.perPage)
   const page = Number(req.query.page)
 
-  const books = getBooksService({ perPage, page })
+  try {
+    const books = await getBooksService({ perPage, page })
 
-  res.send(books)
+    res.send(books)
+  } catch (error) {
+    throw error
+  }
 }

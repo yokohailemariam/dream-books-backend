@@ -19,8 +19,14 @@ function createBookService(bookData) {
 exports.createBookService = createBookService;
 function getBooksService({ perPage: limit = 10, page = 1 }) {
     return __awaiter(this, void 0, void 0, function* () {
-        const offset = (page - 1) * limit;
-        return (0, bookRepositories_1.getBooks)({ perPage: limit, page: offset });
+        try {
+            const offset = (page - 1) * limit;
+            const res = yield (0, bookRepositories_1.getBooks)({ perPage: limit, page: offset });
+            return res;
+        }
+        catch (error) {
+            throw error;
+        }
     });
 }
 exports.getBooksService = getBooksService;

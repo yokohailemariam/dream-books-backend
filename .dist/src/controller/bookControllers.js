@@ -49,8 +49,13 @@ function getBookHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const perPage = Number(req.query.perPage);
         const page = Number(req.query.page);
-        const books = (0, bookServices_1.getBooksService)({ perPage, page });
-        res.send(books);
+        try {
+            const books = yield (0, bookServices_1.getBooksService)({ perPage, page });
+            res.send(books);
+        }
+        catch (error) {
+            throw error;
+        }
     });
 }
 exports.getBookHandler = getBookHandler;

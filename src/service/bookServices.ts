@@ -13,6 +13,11 @@ export async function getBooksService({
   perPage: limit = 10,
   page = 1
 }: GetBooksOptions) {
-  const offset = (page - 1) * limit
-  return getBooks({ perPage: limit, page: offset })
+  try {
+    const offset = (page - 1) * limit
+    const res = await getBooks({ perPage: limit, page: offset })
+    return res
+  } catch (error) {
+    throw error
+  }
 }
