@@ -13,17 +13,22 @@ exports.getBooks = exports.createBook = void 0;
 const bookEntities_1 = require("../entity/bookEntities");
 function createBook({ title, description, discountRate, coverImage, price }) {
     return __awaiter(this, void 0, void 0, function* () {
-        return bookEntities_1.Book.create({
-            title,
-            description,
-            discountRate,
-            coverImage,
-            price
-        });
+        try {
+            let book = yield bookEntities_1.Book.create({
+                title,
+                description,
+                discountRate,
+                coverImage,
+                price
+            });
+            return book;
+        }
+        catch (error) {
+            throw error;
+        }
     });
 }
 exports.createBook = createBook;
-// Math.floor(price - discountRate * (1 / 100) * price)
 function getBooks({ perPage: limit = 10, page: offset = 0 } = {}) {
     return __awaiter(this, void 0, void 0, function* () {
         try {

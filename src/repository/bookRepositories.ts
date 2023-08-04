@@ -7,15 +7,20 @@ export async function createBook({
   coverImage,
   price
 }: BookData) {
-  return Book.create({
-    title,
-    description,
-    discountRate,
-    coverImage,
-    price
-  })
+  try {
+    let book = await Book.create({
+      title,
+      description,
+      discountRate,
+      coverImage,
+      price
+    })
+
+    return book
+  } catch (error) {
+    throw error
+  }
 }
-// Math.floor(price - discountRate * (1 / 100) * price)
 
 export async function getBooks({
   perPage: limit = 10,
