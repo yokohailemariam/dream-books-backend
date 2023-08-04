@@ -25,7 +25,7 @@ function getBooksService({ perPage: limit = 10, page = 1 }) {
             return res;
         }
         catch (error) {
-            throw error;
+            console.log(error);
         }
     });
 }

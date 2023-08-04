@@ -32,7 +32,7 @@ function createBookHandler(req, res) {
             res.send('Book created successfully!');
         }
         catch (error) {
-            throw error;
+            console.log(error);
         }
     });
 }
@@ -54,7 +54,7 @@ function getBookHandler(req, res) {
             res.send(books);
         }
         catch (error) {
-            throw error;
+            console.log(error);
         }
     });
 }

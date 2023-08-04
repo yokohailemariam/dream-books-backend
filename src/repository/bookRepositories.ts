@@ -18,7 +18,7 @@ export async function createBook({
 
     return book
   } catch (error) {
-    throw error
+    console.log(error)
   }
 }
 
@@ -42,7 +42,7 @@ export async function getBooks({
 
     return books
   } catch (error) {
-    throw error
+    console.log(error)
   }
 }
 

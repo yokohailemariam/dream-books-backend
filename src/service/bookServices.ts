@@ -18,6 +18,6 @@ export async function getBooksService({
     const res = await getBooks({ perPage: limit, page: offset })
     return res
   } catch (error) {
-    throw error
+    console.log(error)
   }
 }

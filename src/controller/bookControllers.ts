@@ -35,7 +35,7 @@ export async function createBookHandler(req: Request, res: Response) {
 
     res.send('Book created successfully!')
   } catch (error) {
-    throw error
+    console.log(error)
   }
 }
 
@@ -54,6 +54,6 @@ export async function getBookHandler(req: Request, res: Response) {
 
     res.send(books)
   } catch (error) {
-    throw error
+    console.log(error)
   }
 }

@@ -24,7 +24,7 @@ function createBook({ title, description, discountRate, coverImage, price }) {
             return book;
         }
         catch (error) {
-            throw error;
+            console.log(error);
         }
     });
 }
@@ -45,7 +45,7 @@ function getBooks({ perPage: limit = 10, page: offset = 0 } = {}) {
             return books;
         }
         catch (error) {
-            throw error;
+            console.log(error);
         }
     });
 }
